@@ -37,7 +37,7 @@ class TorScraperSpider(scrapy.Spider):
         search_results = []
         self.logger.info(self.search)
         for k in self.search:
-            search_results.append(response.xpath("//*[contains(text(), '{}')]".format(self.search[k])))
+            search_results.append(response.xpath("//*[contains(text(), '{}')]".format(self.search[k])).extract())
         links = response.css('a').getall()
         mail_links = [ l for l in links if 'mail' in l]
         usernames = [ l for l in links if 'user' in l]
